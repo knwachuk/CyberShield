@@ -16,11 +16,32 @@ hatebert_analyzer = pipeline("text-classification", model=hatebert_model, tokeni
 
 # Step 1: Load abusive words from file
 def load_abusive_words(file_path):
+    """
+    Loads a list of abusive words from a file.
+
+    Each line in the file should contain a single word. The function reads all lines,
+    strips whitespace, converts them to lowercase, and returns the list of words.
+
+    Args:
+        file_path (str): The path to the file containing abusive words.
+
+    Returns:
+        list[str]: A list of abusive words in lowercase.
+    """
     with open(file_path, 'r') as file:
         return [word.strip().lower() for word in file.readlines()]
     
 #Step2: Analyze sentiment of the input text
 def analyze_sentiment(text):
+        """
+        Analyzes the sentiment of the given text using various sentiment analysis models.
+
+        Args:
+            text (str): The input text to analyze.
+
+        Returns:
+            dict: A dictionary containing the sentiment analysis results from different models.
+        """
         bert_result=bert_analyzer(text)[0]
         vader_result=vader_analyzer.polarity_scores(text)
         roberta_result = roberta_analyzer(text)[0]
@@ -61,6 +82,24 @@ def analyze_sentiment(text):
 
 # Step 3: Check text for abusive words
 def detect_abuse(text, abusive_words):
+    """
+    Detects abusive words in a given text and analyzes its sentiment.
+
+    Args:
+        text (str): The input text to be analyzed.
+        abusive_words (list of str): A list of words considered abusive.
+    Returns:
+        dict: A dictionary containing:
+            - 'abusive-words-found' (list): List of detected abusive words with their severity.
+            - 'sentiment' (Any): Sentiment analysis report of the input text.
+            - 'text_analyzed' (str): The original text analyzed.
+        If no abusive words are found, returns:
+            - 'abusive-words_found' (list): An empty list.
+            - 'sentiment' (Any): Sentiment analysis report of the input text.
+            - 'text_analyze' (str): The original text analyzed.
+    Note:
+        The function relies on an external `analyze_sentiment` function to generate the sentiment report.
+    """
     detected = []
     words_in_text = text.lower().split()  # Split input text into words
     sentiment_report=analyze_sentiment(text)
