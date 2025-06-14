@@ -70,6 +70,33 @@ cyber_shield/
 
 **Notes:**
 
-text_sniffer.py is where your current logic would go. backend/app/main.py is the entrypoint for your API server (e.g., FastAPI or Flask). backend/app/db/ handles database connections and CRUD operations. frontend/ is for your React/Vue/Angular app. data/ holds static files like abusive word lists. scripts/ can be used for database migrations or setup scripts.
+1. `text_sniffer.py` is where your current logic would go.
+2. `backend/app/main.py` is the entrypoint for your API server (e.g., FastAPI or Flask).
+3. ` backend/app/db/` handles database connections and CRUD operations. 
+4. `frontend/` is for your React/Vue/Angular app. 
+5. `data/` holds static files like abusive word lists. 
+6. `scripts/` can be used for database migrations or setup scripts.
+
+## Notes
+
+#### Versions of `CyberShield`
+
+There are two versions of `CyberShield`: `cyber_shield` and `cyber_shield_mini`.
+
+#### `cyber_shield/updated_data.json`
+
+`cyber_shield/updated_data.json` from Kaggle (about 3533). Review to see if it can be readily downloadable.
+
+#### Non-standard `text`
+
+Evaluate non-standard presentation of abuse
+
+```json
+   "21": {
+         "TEXT": "Idi0t f00l.",
+         "Sentiment": "Negative",
+         "Language": "EN"
+   }
+```
 
 ## FAQ
