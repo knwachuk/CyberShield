@@ -27,6 +27,14 @@ To set up the project, follow these steps:
 
 ## Codebase Structure
 
+CyberShield has 3 components:
+
+1. The `CyberShield` codebase which is a component of the QMLP
+2. The `backend` 
+3. The `frontend`
+
+This mimics the setup for QMLP, however, since it is intended to standalone, it will be built in a single repository.
+
 > **Note**
 >
 > This is a tentative structure of `cyber_shield` Event Detector of the `QMLP` project.
