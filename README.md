@@ -107,4 +107,16 @@ Evaluate non-standard presentation of abuse
    }
 ```
 
+#### `data_loader` and `sentiment_analyzer_script`
+
+`data_loader`
+
+This currently houses the class responsible for extracting tweets or loading a JSON file containing a list of tweet objects.
+
+`sentiment_analyzer_script`
+
+Also has a routine that will load a file containing tweet objects, which needs to be resolved to a single file, but it serves as a sample on how to utilize the loading mechanisms.
+
+Eventually, it will be the script that does the full `CyberShield` processing once all processing information is moved to a single file.
+
 ## FAQ
