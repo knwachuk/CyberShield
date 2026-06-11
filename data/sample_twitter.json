@@ -1,0 +1,140 @@
+{
+  "abuser_joe": {
+    "account": {
+      "username": "abuser_joe",
+      "user_id": "1001",
+      "display_name": "Joe M.",
+      "bio": "Opinions are my own. Gaming, sports, hot takes.",
+      "location": "Newark, NJ",
+      "followers_count": 230,
+      "following_count": 410,
+      "post_count": 5,
+      "verified": false
+    },
+    "posts": [
+      {
+        "post_id": "9001",
+        "text": "@kind_amy honestly you are so stupid, nobody likes you. Just quit already.",
+        "created_at": "2026-06-01T14:02:00Z",
+        "mentions": ["kind_amy"],
+        "reply_to_username": "kind_amy",
+        "like_count": 0
+      },
+      {
+        "post_id": "9002",
+        "text": "@kind_amy what a pathetic loser. Your work is absolute trash.",
+        "created_at": "2026-06-02T09:30:00Z",
+        "mentions": ["kind_amy"],
+        "reply_to_username": "kind_amy",
+        "like_count": 1
+      },
+      {
+        "post_id": "9003",
+        "text": "@kind_amy you should quit, you are worthless and ugly.",
+        "created_at": "2026-06-03T18:45:00Z",
+        "mentions": ["kind_amy"],
+        "reply_to_username": "kind_amy",
+        "like_count": 0
+      },
+      {
+        "post_id": "9004",
+        "text": "Great game last night, what a finish!",
+        "created_at": "2026-06-04T20:10:00Z",
+        "mentions": [],
+        "like_count": 12
+      },
+      {
+        "post_id": "9005",
+        "text": "@some_friend lol that was hilarious, good one",
+        "created_at": "2026-06-05T11:00:00Z",
+        "mentions": ["some_friend"],
+        "reply_to_username": "some_friend",
+        "like_count": 3
+      }
+    ]
+  },
+  "kind_amy": {
+    "account": {
+      "username": "kind_amy",
+      "user_id": "1002",
+      "display_name": "Amy Rivera",
+      "bio": "Illustrator & community organizer. She/her. Coffee enthusiast.",
+      "location": "Newark, NJ",
+      "url": "https://amyrivera.art",
+      "followers_count": 4100,
+      "following_count": 320,
+      "post_count": 4,
+      "verified": false
+    },
+    "posts": [
+      {
+        "post_id": "8001",
+        "text": "@abuser_joe please stop, this is really hurtful. I'm just sharing my art.",
+        "created_at": "2026-06-02T10:00:00Z",
+        "mentions": ["abuser_joe"],
+        "reply_to_username": "abuser_joe",
+        "like_count": 40
+      },
+      {
+        "post_id": "8002",
+        "text": "New mural finished today! So grateful for this wonderful community.",
+        "created_at": "2026-06-03T16:00:00Z",
+        "mentions": [],
+        "like_count": 220
+      },
+      {
+        "post_id": "8003",
+        "text": "Thank you all for the kind words on the latest piece, it means a lot.",
+        "created_at": "2026-06-04T12:00:00Z",
+        "mentions": [],
+        "like_count": 180
+      },
+      {
+        "post_id": "8004",
+        "text": "Workshop sign-ups are open! Come learn to paint with us this weekend.",
+        "created_at": "2026-06-05T08:30:00Z",
+        "mentions": [],
+        "like_count": 95
+      }
+    ]
+  },
+  "neutral_sam": {
+    "account": {
+      "username": "neutral_sam",
+      "user_id": "1003",
+      "display_name": "Sam Park",
+      "bio": "Software engineer. Photography on weekends.",
+      "location": "Seattle, WA",
+      "url": "https://sampark.dev",
+      "followers_count": 870,
+      "following_count": 540,
+      "post_count": 3,
+      "verified": false
+    },
+    "posts": [
+      {
+        "post_id": "7001",
+        "text": "@kind_amy love your latest mural, the colors are incredible!",
+        "created_at": "2026-06-04T13:00:00Z",
+        "mentions": ["kind_amy"],
+        "reply_to_username": "kind_amy",
+        "like_count": 8
+      },
+      {
+        "post_id": "7002",
+        "text": "Shipped a fun feature today. Tests green, coffee empty.",
+        "created_at": "2026-06-05T19:00:00Z",
+        "mentions": [],
+        "like_count": 22
+      },
+      {
+        "post_id": "7003",
+        "text": "@abuser_joe not cool man, leave her alone.",
+        "created_at": "2026-06-03T19:30:00Z",
+        "mentions": ["abuser_joe"],
+        "reply_to_username": "abuser_joe",
+        "like_count": 15
+      }
+    ]
+  }
+}

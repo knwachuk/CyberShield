@@ -1,0 +1,34 @@
+{
+  "source": {
+    "platform": "twitter",
+    "username": "amy_rivera_art",
+    "display_name": "Amy Rivera",
+    "bio": "Illustrator & community organizer. She/her. Coffee enthusiast.",
+    "location": "Newark, NJ",
+    "url": "https://amyrivera.art"
+  },
+  "candidates": [
+    {
+      "platform": "instagram",
+      "username": "amyrivera.art",
+      "display_name": "Amy Rivera",
+      "bio": "Illustrator and community organizer in Newark. Coffee + murals.",
+      "location": "Newark",
+      "url": "https://amyrivera.art"
+    },
+    {
+      "platform": "instagram",
+      "username": "amy_r_painter",
+      "display_name": "Amy R",
+      "bio": "I paint sometimes.",
+      "location": "New Jersey"
+    },
+    {
+      "platform": "instagram",
+      "username": "totally_unrelated",
+      "display_name": "Bob's Auto Parts",
+      "bio": "Best deals on tires in Texas.",
+      "location": "Austin, TX"
+    }
+  ]
+}

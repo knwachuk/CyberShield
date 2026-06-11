@@ -1,0 +1,9 @@
+# Full-mode dependencies (CYBERSHIELD_ANALYZER_MODE=full).
+# These pull in the transformer-based hate-speech and sentiment models used by
+# the original prototype. They are large; install only if you need full mode.
+-r requirements.txt
+
+torch>=2.0
+transformers>=4.40
+textblob>=0.18
+sentence-transformers>=2.7

@@ -1,0 +1,9 @@
+# Core / lite-mode dependencies.
+# The engines' default ("lite") path runs with only these. The GUI needs Flask;
+# live Twitter collection needs requests; sentiment uses VADER.
+flask>=3.0
+requests>=2.31
+vaderSentiment>=3.3.2
+
+# Testing
+pytest>=8.0
