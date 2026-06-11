@@ -1,0 +1,33 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cybershield"
+version = "0.1.0"
+description = "Three-engine platform for social-media data analytics, cross-platform identity reconciliation, and directed-abuse detection."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "flask>=3.0",
+    "requests>=2.31",
+    "vaderSentiment>=3.3.2",
+]
+
+[project.optional-dependencies]
+full = [
+    "torch>=2.0",
+    "transformers>=4.40",
+    "textblob>=0.18",
+    "sentence-transformers>=2.7",
+]
+test = ["pytest>=8.0"]
+
+[project.scripts]
+cybershield = "cli:main"
+
+[tool.setuptools]
+packages = ["cybershield"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
