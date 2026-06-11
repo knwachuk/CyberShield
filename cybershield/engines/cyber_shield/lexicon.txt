@@ -1,0 +1,33 @@
+# CyberShield default abuse lexicon.
+# One term per line. Lines starting with '#' are comments and are ignored.
+# Terms are matched case-insensitively against normalised (accent-stripped)
+# tokens, and a fuzzy pass catches light obfuscation (e.g. "stup1d").
+#
+# This is a deliberately moderate, demonstration-grade list seeded from the
+# project's original abusive_words.txt. Operators are expected to extend it
+# (and add platform/community-specific terms) for production use.
+stupid
+idiot
+dumb
+loser
+hate
+fool
+moron
+pathetic
+worthless
+trash
+ugly
+disgusting
+freak
+clown
+coward
+liar
+scum
+garbage
+nobody
+useless
+kill yourself
+shut up
+get lost
+nobody likes you
+you should quit
