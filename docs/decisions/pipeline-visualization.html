@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CyberShield — Abuse Detection Pipeline</title>
+<style>
+  :root{
+    --bg:#f7f8fa; --panel:#ffffff; --ink:#1f2430; --muted:#6b7385; --line:#e2e6ee;
+    --hi:#2f8f5b; --hi-bg:#e7f5ee; --med:#b5790f; --med-bg:#fbf0db; --lo:#c0492f; --lo-bg:#fae7e2;
+    --sda:#1f6fb2; --cire:#6a4bb0; --cs:#0f8f78; --human:#5f6675;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.5}
+  .wrap{max-width:1180px;margin:0 auto;padding:28px 22px 60px}
+  h1{font-size:22px;margin:0 0 4px;font-weight:600}
+  .sub{color:var(--muted);font-size:14px;margin:0 0 20px;max-width:760px}
+  .legend{display:flex;gap:22px;flex-wrap:wrap;background:var(--panel);border:1px solid var(--line);
+    border-radius:12px;padding:12px 16px;margin-bottom:22px;font-size:12.5px}
+  .legend b{font-weight:600;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-right:4px}
+  .legend .item{display:inline-flex;align-items:center;gap:6px;margin-right:14px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+  .ebadge{font-size:11px;padding:1px 8px;border-radius:20px;color:#fff;font-weight:600;white-space:nowrap}
+  .e-sda{background:var(--sda)} .e-cire{background:var(--cire)} .e-cs{background:var(--cs)} .e-human{background:var(--human)}
+
+  .flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap}
+  .stage{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:14px;
+    flex:1 1 150px;min-width:150px;display:flex;flex-direction:column}
+  .stage h3{margin:0 0 4px;font-size:13.5px;font-weight:600}
+  .stage p{margin:0;font-size:11.5px;color:var(--muted)}
+  .arrow{display:flex;align-items:center;justify-content:center;color:var(--muted);
+    font-size:22px;flex:0 0 26px}
+  .bank{flex:1 1 270px;min-width:250px}
+  .det{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;
+    padding:7px 9px;margin-top:7px;font-size:12px;background:#fff}
+  .det .nm{font-weight:600}
+  .det .ap{color:var(--muted);font-size:11px;display:block}
+  .det.hi{border-left:4px solid var(--hi);background:var(--hi-bg)}
+  .det.med{border-left:4px solid var(--med);background:var(--med-bg)}
+  .det.lo{border-left:4px solid var(--lo);background:var(--lo-bg)}
+  .det .meta{margin-left:auto;text-align:right;display:flex;flex-direction:column;gap:3px;align-items:flex-end}
+
+  .tiers{margin-top:8px}
+  .tier{display:flex;align-items:center;gap:8px;font-size:11.5px;padding:4px 8px;border-radius:6px;margin-top:4px}
+  .t0{background:#eef1f5;color:#444} .t1{background:#e7f5ee;color:#236b45}
+  .t2{background:#fbf0db;color:#8a5b08} .t3{background:#f7e2d6;color:#a8521f} .t4{background:#fae7e2;color:#9c2f1a;font-weight:600}
+
+  .rail{display:flex;align-items:center;gap:14px;background:var(--panel);border:1px dashed var(--line);
+    border-radius:12px;padding:14px 16px;margin-top:16px;font-size:12.5px;flex-wrap:wrap}
+  .rail .tag{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+  .rail .node{background:#fff;border:1px solid var(--line);border-radius:8px;padding:6px 11px;font-weight:600;font-size:12px}
+  .rail .lp{color:var(--muted)}
+  .gate{border-color:#e7c7bd}
+  .caption{color:var(--muted);font-size:12.5px;margin-top:22px;max-width:900px}
+  code{background:#eef1f5;padding:1px 5px;border-radius:4px;font-size:11.5px}
+  @media(max-width:780px){.arrow{flex-basis:100%;height:22px;transform:rotate(90deg)}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Abuse detection pipeline</h1>
+  <p class="sub">Decomposed, calibrated, explainable. Each dimension of abuse is a separate
+  detector that emits a calibrated score plus its evidence; results are fused into a severity
+  tier; confident extremes are auto-handled and everything ambiguous goes to a person, whose
+  decisions retrain the detectors.</p>
+
+  <div class="legend">
+    <span><b>Tractability</b></span>
+    <span class="item"><span class="dot" style="background:var(--hi)"></span>High — software does this well</span>
+    <span class="item"><span class="dot" style="background:var(--med)"></span>Medium — assistive, watch errors</span>
+    <span class="item"><span class="dot" style="background:var(--lo)"></span>Low — flag &amp; route to human</span>
+    <span style="flex-basis:100%;height:2px"></span>
+    <span><b>Owning engine</b></span>
+    <span class="item"><span class="ebadge e-sda">Social Data</span></span>
+    <span class="item"><span class="ebadge e-cire">Identity</span></span>
+    <span class="item"><span class="ebadge e-cs">Cyber Shield</span></span>
+    <span class="item"><span class="ebadge e-human">Human</span></span>
+  </div>
+
+  <div class="flow">
+    <div class="stage">
+      <h3>1 · Collect</h3>
+      <p>Normalised posts for both accounts (Social Data Analytics).</p>
+    </div>
+    <div class="arrow">›</div>
+
+    <div class="stage">
+      <h3>2 · Direct</h3>
+      <p>Keep only messages each account aims at the other (mentions / replies / thread).</p>
+    </div>
+    <div class="arrow">›</div>
+
+    <div class="stage bank">
+      <h3>3 · Per-dimension detectors</h3>
+      <p>Each emits a calibrated score + evidence.</p>
+
+      <div class="det hi"><span class="dot" style="background:var(--hi)"></span>
+        <span><span class="nm">DirectedMessageExtractor</span><span class="ap">graph / thread parse</span></span>
+        <span class="meta"><span class="ebadge e-sda">Social Data</span></span></div>
+
+      <div class="det hi"><span class="dot" style="background:var(--hi)"></span>
+        <span><span class="nm">ContentClassifier</span><span class="ap">toxicity / hate / threat + doxxing NER</span></span>
+        <span class="meta"><span class="ebadge e-cs">Cyber Shield</span></span></div>
+
+      <div class="det hi"><span class="dot" style="background:var(--hi)"></span>
+        <span><span class="nm">TemporalPatternDetector</span><span class="ap">recurrence, burst, escalation</span></span>
+        <span class="meta"><span class="ebadge e-sda">Social Data</span></span></div>
+
+      <div class="det med"><span class="dot" style="background:var(--med)"></span>
+        <span><span class="nm">AsymmetryDetector</span><span class="ap">follower ratio, pile-on fan-in</span></span>
+        <span class="meta"><span class="ebadge e-sda">Social Data</span></span></div>
+
+      <div class="det med"><span class="dot" style="background:var(--med)"></span>
+        <span><span class="nm">TargetStanceDetector</span><span class="ap">person vs argument (aspect / LLM)</span></span>
+        <span class="meta"><span class="ebadge e-cs">Cyber Shield</span></span></div>
+
+      <div class="det med"><span class="dot" style="background:var(--med)"></span>
+        <span><span class="nm">IdentityLinker</span><span class="ap">sockpuppet / ban-evasion</span></span>
+        <span class="meta"><span class="ebadge e-cire">Identity</span></span></div>
+
+      <div class="det med"><span class="dot" style="background:var(--med)"></span>
+        <span><span class="nm">CounterspeechDetector</span><span class="ap">is this defending the target?</span></span>
+        <span class="meta"><span class="ebadge e-cs">Cyber Shield</span></span></div>
+
+      <div class="det lo"><span class="dot" style="background:var(--lo)"></span>
+        <span><span class="nm">ContextAmbiguityFlag</span><span class="ap">sarcasm / reclaimed language</span></span>
+        <span class="meta"><span class="ebadge e-cs">Cyber Shield</span><span class="ebadge e-human">Human</span></span></div>
+
+      <div class="det lo"><span class="dot" style="background:var(--lo)"></span>
+        <span><span class="nm">RelationshipModel</span><span class="ap">consent / relationship proxy</span></span>
+        <span class="meta"><span class="ebadge e-sda">Social Data</span><span class="ebadge e-human">Human</span></span></div>
+    </div>
+    <div class="arrow">›</div>
+
+    <div class="stage">
+      <h3>4 · Calibrate</h3>
+      <p>Per detector, so a 0.8 means 0.8 everywhere and scores are comparable.</p>
+    </div>
+    <div class="arrow">›</div>
+
+    <div class="stage">
+      <h3>5 · Fuse → tier</h3>
+      <p>Transparent, versioned rules + gates map scores to a severity tier.</p>
+      <div class="tiers">
+        <div class="tier t0">Not abuse</div>
+        <div class="tier t1">Low</div>
+        <div class="tier t2">Medium</div>
+        <div class="tier t3">High</div>
+        <div class="tier t4">Critical</div>
+      </div>
+    </div>
+    <div class="arrow">›</div>
+
+    <div class="stage">
+      <h3>6 · Route</h3>
+      <p>Confident extreme → auto-handle (rare, conservative). Everything else → human.</p>
+    </div>
+  </div>
+
+  <div class="rail">
+    <span class="tag">Human&nbsp;loop</span>
+    <span class="node">Review queue</span><span class="lp">→ reviewer decides (owns consent, sarcasm, counterspeech)</span>
+    <span class="node">Feedback store</span><span class="lp">→ active-learning labels on the hardest cases</span>
+    <span class="lp" style="font-weight:600">⤴ retrains the detectors</span>
+  </div>
+
+  <div class="rail gate">
+    <span class="tag">Release&nbsp;gate</span>
+    <span class="node">Fairness &amp; calibration audit</span>
+    <span class="lp">subgroup error + calibration checks must pass before any detector or fusion config ships ⤴</span>
+  </div>
+
+  <p class="caption">Colour shows how well software can do each job today: green detectors carry
+  the verdict, amber detectors advise (and their errors are watched), and the two red detectors
+  exist mainly to <em>recognise their own uncertainty and route the case to a person</em> rather
+  than to decide it. The human loop and the fairness gate are cross-cutting: the loop feeds
+  reviewer decisions back as training labels, and the gate blocks any release that fails subgroup
+  fairness or calibration checks. See the ADRs in this directory for the reasoning behind each
+  choice (ADR-0001 … ADR-0008).</p>
+</div>
+</body>
+</html>
